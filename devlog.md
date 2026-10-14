@@ -19,3 +19,16 @@ Using a PowerShell string array and the python command resolved both issues.
 
 The logger reads messages from standard input. Later, the driver will send those messages through a pipe. 
 The logger flushes each record so it does not remain buffered until exit. Next session I will review and test the encryption backend.
+
+
+# # 10-13-2026 11:45pm CDT - Session 2 start
+
+Since the last session, I researched about some question i had about the logger and
+protocol. Today I will review and integrate the encryption backend.
+I will check the supplied HELLO example and a longer repeating-key example.
+
+The backend keeps its passkey in its own process memory. PASS changes that
+key. ENCRYPT and DECRYPT each return one line that starts with RESULT or
+ERROR. I will check missing keys, invalid strings, and alphabet wraparound.
+
+
