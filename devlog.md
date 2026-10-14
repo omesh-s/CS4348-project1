@@ -21,7 +21,7 @@ The logger reads messages from standard input. Later, the driver will send those
 The logger flushes each record so it does not remain buffered until exit. Next session I will review and test the encryption backend.
 
 
-# # 10-13-2026 11:45pm CDT - Session 2 start
+# 10-13-2026 11:10pm CDT - Session 2 start
 
 Since the last session, I researched about some question i had about the logger and
 protocol. Today I will review and integrate the encryption backend.
@@ -32,3 +32,14 @@ key. ENCRYPT and DECRYPT each return one line that starts with RESULT or
 ERROR. I will check missing keys, invalid strings, and alphabet wraparound.
 
 
+# 10-13-2026 11:55pm CDT - Session 2 end
+
+I integrated the supplied encryption.py and tested its commands. With the key LEMON, encrypting ATTACKATDAWN returned LXFOPVEFRNHR. 
+Decrypting that result returned ATTACKATDAWN. With the key B, encrypting Z returned A, which confirmed that the cipher wraps around the alphabet.
+
+PASS 123 returned an error because the key must contain only letters. Encrypting Z again still returned A. 
+This showed that rejecting an invalid password did not replace the existing key. These checks matched the expected output.
+
+The key repeats when the text is longer than the key. Encryption adds the key shift, and decryption subtracts it, both modulo 26. 
+The encryption process stores the current passkey in its own memory. Each response is flushed so the driver can read it through a pipe without waiting for the backend to exit. 
+Next session I will connect both child programs to the interactive driver.
