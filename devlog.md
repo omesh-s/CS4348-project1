@@ -43,3 +43,11 @@ This showed that rejecting an invalid password did not replace the existing key.
 The key repeats when the text is longer than the key. Encryption adds the key shift, and decryption subtracts it, both modulo 26. 
 The encryption process stores the current passkey in its own memory. Each response is flushed so the driver can read it through a pipe without waiting for the backend to exit. 
 Next session I will connect both child programs to the interactive driver.
+
+
+# 10-15-2026 4:01pm CDT - Session 3 start
+
+The backend tests showed that encryption, decryption, and invalid-key handling work. My next question is how the driver will send commands through pipes and read each response without getting stuck waiting. Today I will review and integrate the suplied driver, connect it to both child programs, and test history selection and input validation.
+
+Popen starts separate processes. The driver writes a newline-terminated command to the encryption child's stdin, flushes it, and reads one response line from its stdout. It sends log messages through the logger's stdin. I will check that new passwords stay out of history and logs, that history selections work, and that QUIT shuts down both child processes.
+
