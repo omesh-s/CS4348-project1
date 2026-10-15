@@ -51,3 +51,11 @@ The backend tests showed that encryption, decryption, and invalid-key handling w
 
 Popen starts separate processes. The driver writes a newline-terminated command to the encryption child's stdin, flushes it, and reads one response line from its stdout. It sends log messages through the logger's stdin. I will check that new passwords stay out of history and logs, that history selections work, and that QUIT shuts down both child processes.
 
+
+# 10-15-2026 4:49pm CDT - Session 3 end
+
+I integrated the supplied driver and tested communication with both child programs. Encrypting ATTACKATDAWN with LEMON returned LXFOPVEFRNHR. Selecting that result from history for decryption returned ATTACKATDAWN. The log recorded startup, commands, results, and exit without including LEMON. A new run started with empty history and no password set.
+
+I tested input validation and history controls. Hello World! and 123 were rejected, while lowercase hello was accepted. With key B, it returned IFMMP. An invalid history number was rejected, and entering 0 let me enter a new password. With key C, encrypting HELLO from history returned JGNNQ. Cancelling an encrypt command also worked.
+
+The launch command initially failed because Windows could not find python3. Using python resolved it. The driver sends commands through pipes and flushes each message before reading a response. History stays in the driver, while the encryption process stores the passkey. Next session I will run the full test suite and check the repository for submission.
