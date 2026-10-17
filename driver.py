@@ -106,15 +106,24 @@ def main():
 
     try:
         # stderr stays separate from stdout, so errors cannot corrupt the protocol.
+        child_options = (
+            {"creationflags": subprocess.CREATE_NEW_PROCESS_GROUP}
+            if sys.platform == "win32"
+            else {"start_new_session": True}
+        )
+
         logger = subprocess.Popen(
             [sys.executable, str(directory / "logger.py"), sys.argv[1]],
             stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True,
             encoding="utf-8", bufsize=1,
+            **child_options,
         )
+
         encryption = subprocess.Popen(
             [sys.executable, str(directory / "encryption.py")],
             stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True,
             encoding="utf-8", bufsize=1,
+            **child_options,
         )
         log("START", "Driver started.")
         started = True
