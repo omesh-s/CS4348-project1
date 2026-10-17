@@ -59,3 +59,12 @@ I integrated the supplied driver and tested communication with both child progra
 I tested input validation and history controls. Hello World! and 123 were rejected, while lowercase hello was accepted. With key B, it returned IFMMP. An invalid history number was rejected, and entering 0 let me enter a new password. With key C, encrypting HELLO from history returned JGNNQ. Cancelling an encrypt command also worked.
 
 The launch command initially failed because Windows could not find python3. Using python resolved it. The driver sends commands through pipes and flushes each message before reading a response. History stays in the driver, while the encryption process stores the passkey. Next session I will run the full test suite and check the repository for submission.
+
+
+
+# 10-17-2026 1:11pm CDT - Session 4 start
+
+The driver passed the manual checks in the last session. I still need to check how it handles unexpected input ending and file errors, and whether both child processes shut down cleanly. Today I will inspect the supplied tests, run them on my machine, review the run instructions, and check the Git repository before packaging it.
+
+I will focus on child process launches, end-of-file shutdown, password values staying out of logs, invalid file paths, and history resetting between runs. I will also verify that the source files and devlog are tracked, the working tree is clean, and the submission ZIP includes the hidden .git directory so the commit history is preserved.
+
