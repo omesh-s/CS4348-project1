@@ -76,3 +76,9 @@ I ran the supplied test suite on Windows. The first run passed 22 tests and fail
 The manual Ctrl+C check exposed a shutdown problem. The interrupt reached both children, causing tracebacks and stopping the logger before it could record the driver's exit. I updated the driver to start the children in separate process groups on Windows, allowing the driver to handle Ctrl+C and send QUIT through the pipes.
 
 After the changes, all 23 tests passed again. Ctrl+C exited without tracebacks, and the log recorded the shutdown request and driver exit. I also resolved a PowerShell copy-command error by copying the two files separately. Next I will finish reviewing the README, check that all source files and devlog changes are committed, and verify the submission ZIP includes the Git history.
+
+
+
+# 10-17-2026 2:10pm CDT - CS1@utdallas Server verification
+
+I extracted the project ZIP on csa-linux01 and ran the full test suite using Python 3.9.25. All 23 tests passed. This verified the encryption, logging, history, input validation, child-process launches, and shutdown checks in the university Linux environment. No code changes were needed.
